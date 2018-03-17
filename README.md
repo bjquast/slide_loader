@@ -25,7 +25,8 @@ The slides_loader provides a web site with input selector for multiple images. T
 
  * There are a few lines within `dataloader.js` and `load_data_serial.pl` that might be changed.
 
-In `./var/www/html/slides_loader/dataloader.js` the following lines must be adapted to your needs:
+
+ - In `./var/www/html/slides_loader/dataloader.js` the following lines must be adapted to your needs:
 
 ```js
 // configure path to perl-script
@@ -35,13 +36,15 @@ var loadscript = "load_data_serial.pl"; // no need to change when script name is
 var scriptpath = "https://"+hostname+cgipath+loadscript; // change protocol part when you are not using https (insecure) 
 [...]
 ```
+
+
 ```js
 // number of parallel requests that can be started 
 var parallelrequests = 2; // only change to higher value when you have more than 4 cpu cores available.
                           // vips is working parallel by itself and uses 200 to 300% of the cpu for each called process.
 ```
 
- * In `./usr/lib/cgi-bin/slides_loader/load_data_serial.pl` change the following lines:
+ - In `./usr/lib/cgi-bin/slides_loader/load_data_serial.pl` change the following lines:
 
 ```perl
 my $filepath = "/var/www/html/slides_loader/imageTiles/"; # change the directory path when you want to use any other directory to store the files
@@ -74,7 +77,7 @@ Depending on your system you will need to create two directories:
 
 For Ubuntu 14.04 and up this means:
  
- ```bash
+ ```sh
  sudo mkdir -p /var/www/html/slides_loader/imageTiles
  sudo chown -R www-data:www-data /var/www/html/slides_loader
  sudo mkdir /usr/lib/cgi-bin/slides_upload
@@ -86,7 +89,7 @@ For Ubuntu 14.04 and up this means:
 
  * Copy the scripts from the downloaded git directory to the appropriate folders:
 
-```
+```sh
 cd slides_loader
 sudo cp -r slides_loader/usr/lib/cgi-bin/slides_loader /usr/lib/cgi-bin/
 sudo chown -R www-data:www-data /usr/lib/cgi-bin/slides_loader
@@ -95,8 +98,84 @@ sudo cp -r slides_loader/var/www/html/slides_loader /var/www/html/
 sudo cp -r slides_loader/var/www/html/slides_loader /var/www/html/
 sudo chown -R www-data:www-data /var/www/html/slides_loader
 ```
+## Restrict access to the slides_upload page and the cgi script!
+
+*It is highly recommended to restrict access to the slides_loader as it allows everybody with access to upload masses of images and use the servers cpu power to convert them!*
+Restriction can be done via Basic Authentication see below
+
+### Apache2 configuration
+
+I recommend to use the https protocol for this service as the passwords are otherwise transfered in plain text to the server. To achieve that users are redirected to the https-protocol you can set up a RewriteRule:
+
+1. To set up a RewriteRule in your *basic* Apache configuration (e. g. /etc/apache2/sites-enabled/default.conf) add the following lines:
+
+```conf
+   RewriteCond %{REQUEST_URI}   ^/slides_loader [NC]
+   RewriteRule ^/(.*) https://hostname.xxx/slides_loader/$1 [NE,L]
+            RewriteCond %{REQUEST_URI}   ^/cgi-bin/slides_loader [NC]
+   RewriteRule ^/(.*) https://hostname.xxx/cgi-bin/slides_loader/$1 [NE,L]
+
+```
+
+2. Set up directory directives in your Apache configuration for *ssl* (e. g. /etc/apache2/sites-enabled/ssl.conf):
+
+```conf
+# basic authentication on html DocumentRoot
+  <Directory /var/www/html/slides_loader>
+        AuthUserFile /etc/apache2/slides_loader_passwd
+        AuthType Basic
+        AuthName slides_loader
+        require valid-user
+    </Directory>
+
+# add a Directory directive that restrictes acces to the slides_loader dir in cgi-bin 
+  ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+ <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                  SSLOptions +StdEnvVars
+  </FilesMatch>
+  <Directory /usr/lib/cgi-bin>
+                  SSLOptions +StdEnvVars
+  </Directory>
+
+
+  <Directory /usr/lib/cgi-bin/slides_loader>
+               AuthUserFile /etc/apache2/slides_loader_passwd
+               AuthType Basic
+               AuthName slides_loader
+               Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+               require valid-user
+  </Directory>
+```
+
+
+3. Set up directory directives in your *basic* Apache configuration that prevents access to the slides_loader directories in DokumentRoot and in the cgi-bin path:
+
+```conf
+# basic authentication on html DocumentRoot
+  <Directory /var/www/html/slides_loader>
+        AuthUserFile /etc/apache2/slides_loader_passwd
+        AuthType Basic
+        AuthName slides_loader
+        require valid-user
+    </Directory>
+
+# in case you have cgi-bin enabled here
+# add a Directory directive that restrictes acces to the slides_loader dir in cgi-bin 
+  ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+
+
+  <Directory /usr/lib/cgi-bin/slides_loader>
+               AuthUserFile /etc/apache2/slides_loader_passwd
+               AuthType Basic
+               AuthName slides_loader
+               Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+               require valid-user
+  </Directory>
+```
+This directives are only used to restrict access when a request is send via http. It is for sequrity only, if we have forgotten to set and activate the RewriteRule
 
 
 
-## Apache2 configuration
+
+
 
