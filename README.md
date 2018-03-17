@@ -15,6 +15,11 @@ The slides_loader provides a web site with input selector for multiple images. T
 
 ## Installation
 
+### Download
+
+  git clone 
+
+### 
 
 
 ## Apache2 configuration
