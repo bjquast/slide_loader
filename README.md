@@ -208,7 +208,7 @@ Unless you have changed the path in `./usr/lib/cgi-bin/slides_loader/load_data_s
 
 # Issues / TODO:
  * There are no subpathes created for multiple loads of image lists. Thus, imagelist.json will be overwritten the next time when any images are loaded. Should be easy to implement in the perl script, by creating a new subdirectory for each call. Will do that when I review the script the next time.
- * There is no clean up of files that are no longer used
+ * There is no clean up of files that are no longer needed
  * Perhaps it is much easier to call a web service like https://github.com/hbz/DeepZoomService to create the tiles and keep them accesible. Therefore the javascript must be adapted
  
  
