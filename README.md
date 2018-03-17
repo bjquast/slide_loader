@@ -23,7 +23,7 @@ The slides_loader provides a web site with input selector for multiple images. T
 
 ### Configure scripts
 
-There are a few lines within `dataloader.js` and `load_data_serial.pl` that might be changed.
+ * There are a few lines within `dataloader.js` and `load_data_serial.pl` that might be changed.
 
 In `./var/www/html/slides_loader/dataloader.js` the following lines must be adapted to your needs:
 
@@ -41,13 +41,14 @@ var parallelrequests = 2; // only change to higher value when you have more than
                           // vips is working parallel by itself and uses 200 to 300% of the cpu for each called process.
 ```
 
-In `./usr/lib/cgi-bin/slides_loader/load_data_serial.pl` change the following lines:
+ * In `./usr/lib/cgi-bin/slides_loader/load_data_serial.pl` change the following lines:
 
 ```perl
 my $filepath = "/var/www/html/slides_loader/imageTiles/"; # change the directory path when you want to use any other directory to store the files
 ```
 
-There are two places in `sub generateDZIFiles` that can also be changed to your needs:
+ * There are two places in `sub generateDZIFiles` that can also be changed to your needs:
+
 ```perl
 sub generateDZIFiles {
 [...]
@@ -57,7 +58,8 @@ sub generateDZIFiles {
    (--suffix .xxx) and the quality, when using file types with lossy compression ([Q=XXX%])
 ```
 
-There is another filter that prevents the writing of image tiles when they do not match the given list of extensions (don't know why I added this, the file type is set before in the system call of the vips program!)
+ * There is another filter that prevents the writing of image tiles when they do not match the given list of extensions (don't know why I added this, the file type is set before in the system call of the vips program!)
+
 ```perl
 [...]
 sub writeImageList {
@@ -65,10 +67,12 @@ sub writeImageList {
 ```
 
 ### Creating server directories
+
 Depending on your system you will need to create two directories:
  * one for the html page and javascript in the DocumentRoot of your web server
  * one for the perl script in the common cgi-bin directory of your sytsem
- For Ubuntu 14.04 and up this means:
+
+For Ubuntu 14.04 and up this means:
  
  ```bash
  sudo mkdir -p /var/www/html/slides_loader/imageTiles
@@ -79,7 +83,8 @@ Depending on your system you will need to create two directories:
  ```
 
 ### Deploy the scripts
- Copy the scripts from the downloaded git directory to the appropriate folders:
+
+ * Copy the scripts from the downloaded git directory to the appropriate folders:
 
 ```
 cd slides_loader
