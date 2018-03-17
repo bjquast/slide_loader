@@ -56,7 +56,7 @@ sub generateDZIFiles {
    (--suffix .xxx) and the quality, when using file types with lossy compression ([Q=XXX%])
 ```
 
-There is another filter that prevents the writing of image tiles when the not in the list of extensions (don't know why I added this, because the file type is set before in the system call of the vips program)
+There is another filter that prevents the writing of image tiles when they do not match the given list of extensions (don't know why I added this, the file type is set before in the system call of the vips program!)
 ```perl
 [...]
 sub writeImageList {
