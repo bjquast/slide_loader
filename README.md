@@ -8,8 +8,7 @@ The slides_loader provides a web site with input selector for multiple images. T
 
 ## Requirements
 
- * libVips > 7.2 
-     libvips can be installed by package manager in Ubuntu >= 14.04 or downloaded from https://github.com/jcupitt/libvips
+ * libVips > 7.2. libvips can be installed by package manager in Ubuntu >= 14.04 or downloaded from https://github.com/jcupitt/libvips
  * Perl 
  * Perl modules: CGI, JSON
  * Apache2 
@@ -25,9 +24,23 @@ The slides_loader provides a web site with input selector for multiple images. T
 
 There are a few points within `dataloader.js` and `load_data_serial.pl`
 
-```
+In `./var/www/html/slides_loader/dataloader.js` the following lines must be adapted to your needs:
 
 ```
+// configure path to perl-script
+var hostname = window.location.hostname  // no need to change
+var cgipath = "/cgi-bin/slides_loader/"; // set the path to cgi-bin directory as it is called in URL / here Ubuntu standard
+var loadscript = "load_data_serial.pl"; // no need to change when script name is not changes
+var scriptpath = "https://"+hostname+cgipath+loadscript; // change protocol part when you are not using https (insecure) 
+[...]
+```
+```
+// number of parallel requests that can be started 
+var parallelrequests = 2; // only change to higher value when you have more than 4 cpu cores available.
+                          // vips is working parallel by itself and uses 200 to 300% of the cpu for each called process.
+```
+
+
 
 
 ### Creating server directories
@@ -50,8 +63,9 @@ Depending on your system you will need to create two directories:
 ```
 cd slides_loader
 
-
 ```
+
+
 
 ## Apache2 configuration
 
