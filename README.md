@@ -40,8 +40,28 @@ var parallelrequests = 2; // only change to higher value when you have more than
                           // vips is working parallel by itself and uses 200 to 300% of the cpu for each called process.
 ```
 
+In `./usr/lib/cgi-bin/slides_loader/load_data_serial.pl` change the following lines:
 
+```perl
+my $filepath = "/var/www/html/slides_loader/imageTiles/"; # change the directory path when you want to use any other directory to store the files
+```
 
+There are two places in `sub generateDZIFiles` that can also be changed to your needs:
+```perl
+sub generateDZIFiles {
+[...]
+   ($basefilename) = $file =~ m/(.+)\.[tif|tiff|jpg|jpeg|png|pnm|pgm]/i; # add or remove file extensions that are allowed to be loaded
+[...]
+   my $makedeepzoom = system("vips dzsave $imagepath $dzipath --suffix .jpg[Q=100]"); # set the file type of the created tiles
+   (--suffix .xxx) and the quality, when using file types with lossy compression ([Q=XXX%])
+```
+
+There is another filter that prevents the writing of image tiles when the not in the list of extensions (don't know why I added this, because the file type is set before in the system call of the vips program)
+```perl
+[...]
+sub writeImageList {
+        ($basefilename) = $file =~ m/(.+)\.[tif|tiff|jpg|jpeg|png|pnm|pgm]/i; # change when you want to write other file types as image tiles
+```
 
 ### Creating server directories
 Depending on your system you will need to create two directories:
