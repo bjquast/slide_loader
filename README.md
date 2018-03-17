@@ -207,9 +207,9 @@ Call the page with `https://yourdomain.xx/load_data.html`
 Unless you have changed the path in `./usr/lib/cgi-bin/slides_loader/load_data_serial.pl` the created tiles are stored in the imageTiles directory within `/var/www/html/slides_loader`. Beside the dzi-files and directories there is a file imagelist.json that will be load by OpenSeaDragon when creating a viewer for all the files in the directory.
 
 # Issues / TODO:
- * There are no subpath for multiple loads of image lists. This imagelist.json will be overwritten the next time when any images are loaded. Should be easy to implement in the perl script, by creating a new subdirectory for each call
+ * There are no subpathes created for multiple loads of image lists. Thus, imagelist.json will be overwritten the next time when any images are loaded. Should be easy to implement in the perl script, by creating a new subdirectory for each call. Will do that when I review the script the next time.
  * There is no clean up of files that are no longer used
- * Perhaps it is much easier to call a web service like DeepZoomService to create the tiles and keep them accesible. Thus the javascript must be adapted
+ * Perhaps it is much easier to call a web service like https://github.com/hbz/DeepZoomService to create the tiles and keep them accesible. Therefore the javascript must be adapted
  
  
 
