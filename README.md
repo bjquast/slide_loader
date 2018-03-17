@@ -12,7 +12,7 @@ The slides_loader provides a web site with input selector for multiple images. T
  * Perl 
  * Perl modules: CGI, JSON
  * Apache2 
- * Apache2 modules: cgi, auth_basic (optional)
+ * Apache2 modules: cgi, rewrite, auth_basic
 
 ## Installation
 
@@ -188,7 +188,9 @@ sudo htpasswd /etc/apache2/slides_loader_passwd <user2>
 5. Enable apache modules and restart server
 
 ```
-sudo a2enstie 
+sudo a2enmod ssl rewrite basic_auth
+sudo apache2ctl configtest
+sudo service apache2 restart
 ```
 
 
