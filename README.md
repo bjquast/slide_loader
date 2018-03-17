@@ -19,17 +19,18 @@ The slides_loader provides a web site with input selector for multiple images. T
 ### Download
 
 `git clone https:// github.com/bjquast/slides_loader.git`
+`cd slides_loader`
 
 ### Configure scripts
 
-There are a few points within `dataloader.js` and `load_data_serial.pl`
+There are a few lines within `dataloader.js` and `load_data_serial.pl` that might be changed.
 
 In `./var/www/html/slides_loader/dataloader.js` the following lines must be adapted to your needs:
 
 ```js
 // configure path to perl-script
 var hostname = window.location.hostname  // no need to change
-var cgipath = "/cgi-bin/slides_loader/"; // set the path to cgi-bin directory as it is called in URL / here Ubuntu standard
+var cgipath = "/cgi-bin/slides_loader/"; // set the path to cgi-bin directory as it is called in URL / here Ubuntu standard path is set
 var loadscript = "load_data_serial.pl"; // no need to change when script name is not changes
 var scriptpath = "https://"+hostname+cgipath+loadscript; // change protocol part when you are not using https (insecure) 
 [...]
@@ -82,7 +83,12 @@ Depending on your system you will need to create two directories:
 
 ```
 cd slides_loader
-
+sudo cp -r slides_loader/usr/lib/cgi-bin/slides_loader /usr/lib/cgi-bin/
+sudo chown -R www-data:www-data /usr/lib/cgi-bin/slides_loader
+sudo chmod -R ug+rx www-data:www-data /usr/lib/cgi-bin/slides_loader
+sudo cp -r slides_loader/var/www/html/slides_loader /var/www/html/
+sudo cp -r slides_loader/var/www/html/slides_loader /var/www/html/
+sudo chown -R www-data:www-data /var/www/html/slides_loader
 ```
 
 
