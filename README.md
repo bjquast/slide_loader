@@ -26,7 +26,7 @@ There are a few points within `dataloader.js` and `load_data_serial.pl`
 
 In `./var/www/html/slides_loader/dataloader.js` the following lines must be adapted to your needs:
 
-```
+```js
 // configure path to perl-script
 var hostname = window.location.hostname  // no need to change
 var cgipath = "/cgi-bin/slides_loader/"; // set the path to cgi-bin directory as it is called in URL / here Ubuntu standard
@@ -34,7 +34,7 @@ var loadscript = "load_data_serial.pl"; // no need to change when script name is
 var scriptpath = "https://"+hostname+cgipath+loadscript; // change protocol part when you are not using https (insecure) 
 [...]
 ```
-```
+```js
 // number of parallel requests that can be started 
 var parallelrequests = 2; // only change to higher value when you have more than 4 cpu cores available.
                           // vips is working parallel by itself and uses 200 to 300% of the cpu for each called process.
@@ -49,7 +49,7 @@ Depending on your system you will need to create two directories:
  * one for the perl script in the common cgi-bin directory of your sytsem
  For Ubuntu 14.04 and up this means:
  
- ```
+ ```bash
  sudo mkdir -p /var/www/html/slides_loader/imageTiles
  sudo chown -R www-data:www-data /var/www/html/slides_loader
  sudo mkdir /usr/lib/cgi-bin/slides_upload
