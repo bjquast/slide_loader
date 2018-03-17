@@ -1,4 +1,22 @@
-# slide_loader
-Simple web interface to load a stack of images and convert them to an OpenSeaDragon tiles stack
+# slides_loader
+Simple web interface to load a stack of images and convert them to an OpenSeaDragon tiles stack. 
 
-## Requierements
+# Purpose
+The slides_loader provides a web site with input selector for multiple images. The images are loaded to the server and converted to image pyramids in the servers web space. The image pyramids can be used with OpenSeaDragon to create an image viewer with deep zoom capabilities.
+
+See for example: www.q-terra.de/tagebau
+
+
+
+## Requirements
+
+ * Perl, Perl modules CGI, JSON
+ * Apache2, cgi, auth_basic (optional)
+
+## Installation
+
+ *
+ *
+
+## Apache2 configuration
+
