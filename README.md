@@ -99,14 +99,14 @@ sudo chown -R www-data:www-data /var/www/html/slides_loader
 ```
 ## Restrict access to the slides_upload page and the cgi script!
 
-*It is highly recommended to restrict access to the slides_loader as it allows everybody with access to upload masses of images and use the servers cpu power to convert them!*
+**It is highly recommended to restrict access to the slides_loader as it allows everybody with access to upload masses of images and use the servers cpu power to convert them!**
 Restriction can be done via Basic Authentication see below
 
 ### Apache2 configuration
 
 I recommend to use the https protocol for this service as the passwords are otherwise transfered in plain text to the server. To achieve that users are redirected to the https-protocol you can set up a RewriteRule:
 
-1. To set up a RewriteRule in your *basic* Apache configuration (e. g. /etc/apache2/sites-enabled/default.conf) add the following lines:
+1. To set up a RewriteRule in your **basic** Apache configuration (e. g. /etc/apache2/sites-enabled/default.conf) add the following lines:
 
 ```conf
    RewriteCond %{REQUEST_URI}   ^/slides_loader [NC]
@@ -116,7 +116,7 @@ I recommend to use the https protocol for this service as the passwords are othe
 
 ```
 
-2. Set up directory directives in your Apache configuration for *ssl* (e. g. /etc/apache2/sites-enabled/ssl.conf):
+2. Set up directory directives in your Apache configuration for **ssl** (e. g. /etc/apache2/sites-enabled/ssl.conf):
 
 ```conf
 # basic authentication on html DocumentRoot
@@ -146,7 +146,7 @@ I recommend to use the https protocol for this service as the passwords are othe
 ```
 
 
-3. Set up directory directives in your *basic* Apache configuration that prevents access to the slides_loader directories in DokumentRoot and in the cgi-bin path:
+3. Set up directory directives in your **basic** Apache configuration that prevents access to the slides_loader directories in DokumentRoot and in the cgi-bin path:
 
 ```conf
 # basic authentication on html DocumentRoot
@@ -172,6 +172,24 @@ I recommend to use the https protocol for this service as the passwords are othe
 ```
 This directives are only used to restrict access when a request is send via http. It is for sequrity only, if we have forgotten to set and activate the RewriteRule
 
+4. Add htpassword file to grant access for users
+
+ * create the password file and add the first user:
+```
+sudo htpasswd -c /etc/apache2/slides_loader_passwd <user1>
+```
+
+ * add the next user
+
+```
+sudo htpasswd /etc/apache2/slides_loader_passwd <user2>
+```
+ 
+5. Enable apache modules and restart server
+
+```
+sudo a2enstie 
+```
 
 
 
