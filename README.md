@@ -128,7 +128,6 @@ I recommend to use the https protocol for this service as the passwords are othe
         require valid-user
     </Directory>
 
-# add a Directory directive that restrictes acces to the slides_loader dir in cgi-bin 
   ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
  <FilesMatch "\.(cgi|shtml|phtml|php)$">
                   SSLOptions +StdEnvVars
@@ -137,7 +136,7 @@ I recommend to use the https protocol for this service as the passwords are othe
                   SSLOptions +StdEnvVars
   </Directory>
 
-
+# add a Directory directive that restrictes acces to the slides_loader dir in cgi-bin 
   <Directory /usr/lib/cgi-bin/slides_loader>
                AuthUserFile /etc/apache2/slides_loader_passwd
                AuthType Basic
