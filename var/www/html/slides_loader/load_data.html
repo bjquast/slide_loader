@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>data loader</title>
+    <meta content="">
+    <meta charset="utf-8">
+
+    <link href="./css/dataloader.css" rel="stylesheet"/>
+
+  </head>
+  <body>
+
+
+<script type="text/javascript" src="./js/dataloader.js"></script>
+
+<div>
+<!--form data must be read by js when upload function is used via XMLHttpRequest-->
+<form id="data_form" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+
+
+<h2>Convert sequence of images to tiles for deepzoom</h2>
+
+<fieldset id="images">
+
+<div id="file_selector">
+<input id="fileinput" name="image_files" type="file" multiple/> 
+</div>
+
+<div id="listbox">
+
+</div>
+
+<div id="progressdiv">
+<!--<progress id="loadprogress" style="margin: 5px"></progress>--> 
+</div>
+
+</fieldset>
+
+
+<button id="startupload" type="button">submit</button>
+<button id="cancelupload" type="button">cancel upload</button>
+
+<button type="reset">reset</button>
+
+</form>
+</div>
+
+
+
+
+  </body>
+</html>
