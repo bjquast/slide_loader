@@ -57,8 +57,7 @@ sub generateDZIFiles {
 [...]
    ($basefilename) = $file =~ m/(.+)\.[tif|tiff|jpg|jpeg|png|pnm|pgm]/i; # add or remove file extensions that are allowed to be loaded
 [...]
-   my $makedeepzoom = system("vips dzsave $imagepath $dzipath --suffix .jpg[Q=100]"); # set the file type of the created tiles
-   (--suffix .xxx) and the quality, when using file types with lossy compression ([Q=XXX%])
+   my $makedeepzoom = system("vips dzsave $imagepath $dzipath --suffix .jpg[Q=100]"); # set the file type of the created tiles (--suffix .xxx) and the quality, when using file types with lossy compression ([Q=XXX%])
 ```
 
  * There is another filter that prevents the writing of image tiles when they do not match the given list of extensions (don't know why I added this, the file type is set before in the system call of the vips program!)
