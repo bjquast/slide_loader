@@ -10,13 +10,14 @@ See for example: www.q-terra.de/tagebau
 
 ## Requirements
 
- * Perl, Perl modules CGI, JSON
- * Apache2, cgi, auth_basic (optional)
+ * Perl 
+ * Perl modules: CGI, JSON
+ * Apache2 
+ * Apache2 modules: cgi, auth_basic (optional)
 
 ## Installation
 
- *
- *
+
 
 ## Apache2 configuration
 
