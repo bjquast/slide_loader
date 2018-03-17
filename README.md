@@ -17,7 +17,7 @@ The slides_loader provides a web site with input selector for multiple images. T
 
 ### Download
 
-  git clone 
+`git clone https:// github.com/bjquast/slides_loader/`
 
 ### 
 
