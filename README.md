@@ -8,6 +8,11 @@ The slides_loader provides a web site with input selector for multiple images. T
 
 ## Requirements
 
+Hmm, before starting with the libs you may consider to have:
+
++ some perl and javascript experience and fun to hack things! This is not a ready to deploy script, it is only part of some tools to use the OpenSeaDragon.js library
+ + Some webserver administration knowledge
+
  * libVips > 7.2. libvips can be installed by package manager in Ubuntu >= 14.04 or downloaded from https://github.com/jcupitt/libvips
  * Perl 
  * Perl modules: CGI, JSON
