@@ -175,7 +175,7 @@ I recommend to use the https protocol for this service as the passwords are othe
                require valid-user
   </Directory>
 ```
-This directives are only used to restrict access when a request is send via http. It is for sequrity only, if we have forgotten to set and activate the RewriteRule
+This directives are only used to restrict access when a request is send via http. It is for security only, if we have forgotten to set and activate the RewriteRule
 
 4. Add htpassword file to grant access for users
 
