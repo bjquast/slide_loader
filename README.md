@@ -163,7 +163,7 @@ I recommend to use the https protocol for this service as the passwords are othe
     </Directory>
 
 # in case you have cgi-bin enabled here
-# add a Directory directive that restrictes acces to the slides_loader dir in cgi-bin 
+# add a Directory directive that restrictes access to the slides_loader dir in cgi-bin 
   ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
 
 
